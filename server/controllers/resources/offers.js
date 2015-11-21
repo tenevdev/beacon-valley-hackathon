@@ -51,7 +51,7 @@ var Offer = require('../../models').Resources.Offer,
 
     },
     update: function(req, res, next) {
-        Offer.findByIdAndUpdate(req.offerId, req.body, { new: true },
+        Offer.findByIdAndUpdate(req.offer.id, req.body, { new: true },
             function(err, offer) {
                 if (err) {
                     return next(err)
@@ -61,7 +61,7 @@ var Offer = require('../../models').Resources.Offer,
             })
     },
     delete: function(req, res, next) {
-        req.offerId.remove(function(err) {
+        req.offer.id.remove(function(err) {
             if (err) {
                 return next(err)
             }
