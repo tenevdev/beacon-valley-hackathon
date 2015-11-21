@@ -8,13 +8,15 @@ var PlacesController = require('../../controllers').Resources.PlacesController,
 var OffersRouter = require('./offers');
 var MenuRouter = require('./menu');
 
-PlacesRouter.param('beaconId', PlacesController.load)
+// Place id is in fact a beacon id
+// The place will be loaded
+PlacesRouter.param('placeId', PlacesController.load)
 
 PlacesRouter.route('/')
     .post(PlacesController.create)
     .get(PlacesController.list);
 
-PlacesRouter.route('/:beaconId')
+PlacesRouter.route('/:placeId')
     .get(PlacesController.get)
     .put(PlacesController.update)
     .delete(PlacesController.delete);
