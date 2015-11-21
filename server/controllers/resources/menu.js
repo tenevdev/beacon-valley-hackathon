@@ -31,17 +31,17 @@ module.exports = {
         async.waterfall([
 
             function(callback) {
-                offer.save(callback)
+                menuSection.save(callback)
             },
-            function(offer, numberAffected, callback) {
+            function(menuSection, numberAffected, callback) {
                 if (req.place) {
                     menuSection.attachToPlace(req.place.id, callback)
                 } else {
-                    callback(null, null, offer)
+                    callback(null, null, menuSection)
                 }
             },
-            function(place, offer, callback) {
-                res.status(201).json(offer)
+            function(place, menuSection, callback) {
+                res.status(201).json(menuSection)
                 callback(null)
             }
         ], next);
