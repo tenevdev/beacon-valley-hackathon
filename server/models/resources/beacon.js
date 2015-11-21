@@ -1,12 +1,10 @@
 // Mongoose beacon template
 var mongoose = require('mongoose'),
+    Place = require('./place'),
     ObjectId = mongoose.Schema.Types.ObjectId
 
 var beaconSchema = new mongoose.Schema({
-    place: {
-        type: ObjectId,
-        required: true
-    },
+    placeName: String,
     beaconId: String
 })
 
@@ -15,11 +13,12 @@ beaconSchema.statics = {
     getPlace: function(id, next) {
         this.findOne({
             beaconId: id
+        }, function(err, beacon){
+            if(err) {
+                return next(err)
+            }
+            Place.getByName(beacon.placeName, false, next)
         })
-            .populate('place')
-            .exec(function(err, beacon) {
-                return next(err, beacon.place)
-            })
     }
 }
 

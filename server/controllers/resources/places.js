@@ -3,6 +3,7 @@
  */
 // Standard controller template
 var Place = require('../../models').Resources.Place,
+    Beacon = require('../../models').Resources.Beacon,
     HttpError = require('../../utils/errors/httpError')
 
 module.exports = {
@@ -31,8 +32,11 @@ module.exports = {
     },
     load: function(req, res, next, beaconId) {
         var lean = req.method === 'GET'
+        console.log('loading')
         Beacon.getPlace(beaconId,
             function(err, place) {
+        console.log('loaded')
+
                 if (err) {
                     return next(err);
                 }
@@ -40,7 +44,7 @@ module.exports = {
                     req.place = place
                     return next()
                 }
-                err = new HttpError(404, 'A resource with this name does not exist : ' + resourceName)
+                err = new HttpError(404, 'A resource with this id does not exist : ' + beaconId)
                 return next(err)
             })
     },
