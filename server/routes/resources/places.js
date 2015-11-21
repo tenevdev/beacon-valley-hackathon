@@ -5,6 +5,7 @@ var PlacesController = require('../../controllers').Resources.PlacesController,
     PlacesRouter = require('express').Router({
         mergeParams: true
     });
+
 var OffersRouter = require('./offers');
 var MenuRouter = require('./menu');
 
@@ -22,7 +23,7 @@ PlacesRouter.route('/:placeId')
     .delete(PlacesController.delete);
 
 
-PlacesRouter.use('/:beaconId/offers', OffersRouter);
-PlacesRouter.use('/:beaconId/menu', MenuRouter);
+PlacesRouter.use('/:placeId/offers', OffersRouter);
+PlacesRouter.use('/:placeId/menu', MenuRouter);
 
 module.exports = PlacesRouter

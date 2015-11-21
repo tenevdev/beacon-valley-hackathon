@@ -13,6 +13,7 @@ OffersRouter.route('/')
     .get(OffersController.list)
 
 OffersRouter.route('/:offerId')
+    .get(OffersController.get)
     .put(OffersController.update)
     .delete(OffersController.delete);
 

@@ -10,14 +10,14 @@ var beaconSchema = new mongoose.Schema({
 
 beaconSchema.methods = {}
 beaconSchema.statics = {
-    getPlace: function(id, next) {
+    getPlace: function(id, isLean, next) {
         this.findOne({
             beaconId: id
         }, function(err, beacon){
             if(err) {
                 return next(err)
             }
-            Place.getByName(beacon.placeName, false, next)
+            Place.getByName(beacon.placeName, isLean, next)
         })
     }
 }

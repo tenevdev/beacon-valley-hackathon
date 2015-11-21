@@ -10,25 +10,27 @@ var Offer = require('../../models').Resources.Offer,
     },
     load: function(req, res, next, offerId) {
         var lean = req.method === 'GET'
-        Offer.getById(offerId, lean,
-            function(err, resource) {
+        Offer.findById(offerId,
+            function(err, offer) {
                 if (err) {
                     return next(err);
                 }
-                if (resource) {
-                    req.offerId = resource
+                if (offer) {
+                    req.offer = offer
                     return next()
                 }
-                err = new HttpError(404, 'A resource with this name does not exist : ' + resourceName)
+                err = new HttpError(404, 'A offer with this name does not exist : ' + offerName)
                 return next(err)
             })
     },
     get: function(req, res, next) {
-        res.status(200).json(req.resource)
+        res.status(200).json(req.offer)
         return next()
     },
     create: function(req, res, next) {
         var offer = new Offer(req.body)
+        console.log(req.place)
+
         async.waterfall([
 
             function(callback) {
@@ -50,11 +52,11 @@ var Offer = require('../../models').Resources.Offer,
     },
     update: function(req, res, next) {
         Offer.findByIdAndUpdate(req.offerId, req.body, { new: true },
-            function(err, resource) {
+            function(err, offer) {
                 if (err) {
                     return next(err)
                 }
-                res.status(200).json(resource)
+                res.status(200).json(offer)
                 return next()
             })
     },

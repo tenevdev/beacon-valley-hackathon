@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    Place = require('./place'),
     ObjectId = mongoose.Schema.Types.ObjectId
 
 var offerSchema = new mongoose.Schema({
@@ -14,7 +15,23 @@ var offerSchema = new mongoose.Schema({
     }
 })
 
-offerSchema.methods = {}
+offerSchema.methods = {
+
+    attachToPlace: function(placeId, next) {
+        var self = this
+
+        Place.findByIdAndUpdate(placeId, {
+            // Add reference to this hub
+            $push: {
+                offers: self.id
+            }
+        }, function(err, place) {
+            if (err)
+                return next(err)
+            return next(null, place, self)
+        })
+    }
+}
 
 offerSchema.statics = {
     getByTitle: function(offerTitle, isLean, next) {

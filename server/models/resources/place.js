@@ -27,6 +27,7 @@ placeSchema.statics = {
         this.findOne({
             name: name
         })
+            .populate('offers')
             .lean(isLean)
             .exec(next)
     }
