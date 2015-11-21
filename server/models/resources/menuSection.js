@@ -18,4 +18,4 @@ menuSectionSchema.statics = {
     }
 }
 
-module.exports = mongoose.menuSection('MenuSection', menuSectionSchema)
+module.exports = mongoose.model('MenuSection', menuSectionSchema)

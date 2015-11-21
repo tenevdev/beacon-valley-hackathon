@@ -26,4 +26,4 @@ offerSchema.statics = {
     }
 }
 
-module.exports = mongoose.offer('Offer', offerSchema)
+module.exports = mongoose.model('Offer', offerSchema)

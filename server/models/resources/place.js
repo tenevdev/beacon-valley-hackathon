@@ -32,4 +32,4 @@ placeSchema.statics = {
     }
 }
 
-module.exports = mongoose.place('Place', placeSchema)
+module.exports = mongoose.model('Place', placeSchema)

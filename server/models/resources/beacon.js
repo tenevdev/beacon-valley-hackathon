@@ -23,4 +23,4 @@ beaconSchema.statics = {
     }
 }
 
-module.exports = mongoose.beacon('Beacon', beaconSchema)
+module.exports = mongoose.model('Beacon', beaconSchema)
