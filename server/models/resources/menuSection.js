@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Schema.Types.ObjectId,
+    Place = require('./place'),
     Product = require('./product');
 
 var menuSectionSchema = new mongoose.Schema({
@@ -7,7 +8,21 @@ var menuSectionSchema = new mongoose.Schema({
     content: [Product.schema]
 })
 
-menuSectionSchema.methods = {}
+menuSectionSchema.methods = {
+    attachToPlace: function(placeId, next) {
+        var self = this
+
+        Place.findByIdAndUpdate(placeId, {
+            $push: {
+                menu: self.id
+            }
+        }, function(err, place) {
+            if (err)
+                return next(err)
+            return next(null, place, self)
+        })
+    }
+}
 menuSectionSchema.statics = {
     getByName: function(name, isLean, next) {
         this.findOne({
