@@ -1,0 +1,58 @@
+//layout=brief
+[{
+    "product": "water",
+    "price": 3.20
+}, {
+    "product": "coffee",
+    "price": 5.20
+}]
+
+//layout=section
+[{
+    "section": "drinks",
+    "contents": [{
+        "product": "water",
+        "price": 3.20
+    }, {
+        "product": "coffee",
+        "price": 5.20
+    }]
+}, {
+    "section": "sandwitches",
+    "contents": [{
+        "product": "hamburger",
+        "price": 6.20
+    }, {
+        "product": "cheeseburger",
+        "price": 7.20
+    }]
+}]
+
+//layout=extensive
+[{
+    "section": "drinks",
+    "contents": [{
+        "product": "water",
+        "price": 3.20,
+        "description": "",
+        "amount": "500ml"
+    }, {
+        "product": "coffee",
+        "price": 5.20,
+        "description": "A special Italian blend",
+        "amount": "50ml"
+    }]
+}, {
+    "section": "sandwitches",
+    "contents": [{
+        "product": "hamburger",
+        "price": 6.20,
+        "description": "Ingredients : tomatoes, lettuce, onions",
+        "amount": "350g"
+    }, {
+        "product": "cheeseburger",
+        "price": 7.20,
+        "description": "Ingredients : cheese, tomatoes, lettuce, onions",
+        "amount": "350g"
+    }]
+}]

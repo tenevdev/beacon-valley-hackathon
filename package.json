@@ -1,0 +1,48 @@
+{
+  "name": "mvc-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm run lint:test",
+    "test": "make test",
+    "test:cov": "make test-cov",
+    "lint": "npm run lint:server & npm run lint:scripts",
+    "lint:server": "jshint server/",
+    "lint:scripts": "jshint public/",
+    "lint:test": "jshint test/",
+    "prebuild": "npm run clean -s",
+    "build": "npm run build:js -s & npm run build:css -s & npm run build:html",
+    "build:js": "browserify public/scripts/main.js > dist/scripts/main.js",
+    "build:html": "jade server/views --out dist/views",
+    "build:css": "ncp public/styles dist/styles",
+    "watch": "watch \"npm run build\" .",
+    "clean": "rimraf dist/scripts/* dist/styles/* dist/views/*",
+    "serve": "nodemon index.js",
+    "live-reload": "live-reload --port=9091 --delay=5000",
+    "open:dev": "opener http://localhost:3000",
+    "start": "concurrent-cli 'npm run live-reload ++ npm run serve ++ npm run open:dev'"
+  },
+  "author": "Tencho Tenev",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.0",
+    "body-parser": "^1.14.1",
+    "confidence": "^1.4.2",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "mongoose": "^4.2.7",
+    "morgan": "^1.6.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.4",
+    "ncp": "^2.0.0",
+    "nodemon": "^1.8.1",
+    "opener": "^1.4.1",
+    "rimraf": "^2.4.4",
+    "watch": "^0.16.0"
+  }
+}
