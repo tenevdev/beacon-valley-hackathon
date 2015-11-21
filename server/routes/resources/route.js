@@ -1,17 +1,18 @@
 var Controller = require('../../controllers').Resources.Controller,
     Router = require('express').Router({
         mergeParams: true
-    })
+    });
 
-Router.param('name', Controller.load)
+Router.param('name', Controller.load);
 
 Router.route('/')
     .get(Controller.list)
-    .post(Controller.create)
+    .post(Controller.create);
 
 Router.route('/:name')
-    .get(Controller.single)
+    .get(Controller.get)
     .put(Controller.update)
-    .delete(Controller.delete)
+    .delete(Controller.delete);
+
 
 module.exports = Router
