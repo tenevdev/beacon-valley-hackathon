@@ -32,10 +32,8 @@ module.exports = {
     },
     load: function(req, res, next, beaconId) {
         var lean = req.method === 'GET'
-        console.log('loading')
         Beacon.getPlace(beaconId,
             function(err, place) {
-        console.log('loaded')
 
                 if (err) {
                     return next(err);

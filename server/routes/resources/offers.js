@@ -6,7 +6,7 @@ var OffersController = require('../../controllers').Resources.OffersController,
         mergeParams: true
     });
 
-Router.param('offerId', OffersController.load);
+OffersRouter.param('offerId', OffersController.load);
 
 OffersRouter.route('/')
     .post(OffersController.create)
