@@ -45,29 +45,26 @@ module.exports = {
             })
     },
     get: function(req, res, next) {
-        res.status(200).json(req.place)
+        res.status(200).json(req.place);
         return next()
     },
     update: function(req, res, next) {
-        Place.findByIdAndUpdate(req.resource.id, req.body, { new: true },
-            function(err, resource) {
-                console.log(req.resource);
-                console.log('---------------------');
-                console.log(resource);
+        Place.findByIdAndUpdate(req.place.id, req.body, { new: true },
+            function(err, place) {
                 if (err) {
                     return next(err)
                 }
-                res.status(200).json(resource)
+                res.status(200).json(place);
                 return next()
             })
     },
     delete: function(req, res, next) {
-        req.resource.remove(function(err) {
+        req.place.remove(function(err) {
             if (err) {
                 return next(err)
             }
-            res.status(204).json()
+            res.status(204).json();
             return next()
         })
     }
-}
+};

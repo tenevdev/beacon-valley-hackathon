@@ -3,32 +3,8 @@ var Model = require('../../models').Resources.Model,
     HttpError = require('../../utils/errors/httpError')
 
 module.exports = {
-    list: function(req, res, next) {
-        Model.find({}, function(err, resources) {
-            if (err) {
-                return next(err)
-            }
-            res.status(200).json(resources)
-            return next()
-        })
-    },
-    load: function(req, res, next, resourceName) {
-        var lean = req.method === 'GET'
-        Model.getByName(resourceName, lean,
-            function(err, resource) {
-                if (err) {
-                    return next(err);
-                }
-                if (resource) {
-                    req.resource = resource
-                    return next()
-                }
-                err = new HttpError(404, 'A resource with this name does not exist : ' + resourceName)
-                return next(err)
-            })
-    },
     get: function(req, res, next) {
-        res.status(200).json(req.resource)
+        res.status(200).json(req.place.menu);
         return next()
     },
     create: function(req, res, next) {

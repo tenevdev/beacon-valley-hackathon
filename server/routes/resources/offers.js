@@ -6,9 +6,13 @@ var OffersController = require('../../controllers').Resources.OffersController,
         mergeParams: true
     });
 
+Router.param('offerId', OffersController.load);
+
 OffersRouter.route('/')
     .post(OffersController.create)
     .get(OffersController.list)
+
+OffersRouter.route('/:offerId')
     .put(OffersController.update)
     .delete(OffersController.delete);
 
