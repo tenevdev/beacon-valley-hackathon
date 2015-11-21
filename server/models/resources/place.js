@@ -28,6 +28,7 @@ placeSchema.statics = {
             name: name
         })
             .populate('offers')
+            .populate('menu')
             .lean(isLean)
             .exec(next)
     }
