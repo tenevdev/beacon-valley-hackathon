@@ -2,12 +2,12 @@
  * Created by ema on 21/11/15.
  */
 // Standard controller template
-var PlacesModel = require('../../models').Resources.PlacesModel,
+var Place = require('../../models').Resources.Place,
     HttpError = require('../../utils/errors/httpError')
 
 module.exports = {
     list: function(req, res, next) {
-        PlacesModel.find({}, function(err, resources) {
+        Place.find({}, function(err, resources) {
             if (err) {
                 return next(err)
             }
@@ -29,15 +29,15 @@ module.exports = {
             return next()
         })
     },
-    load: function(req, res, next, resourceName) {
+    load: function(req, res, next, beaconId) {
         var lean = req.method === 'GET'
-        PlacesModel.getByName(resourceName, lean,
-            function(err, resource) {
+        Beacon.getPlace(beaconId,
+            function(err, place) {
                 if (err) {
                     return next(err);
                 }
-                if (resource) {
-                    req.resource = resource
+                if (place) {
+                    req.place = place
                     return next()
                 }
                 err = new HttpError(404, 'A resource with this name does not exist : ' + resourceName)
@@ -45,11 +45,11 @@ module.exports = {
             })
     },
     get: function(req, res, next) {
-        res.status(200).json(req.resource)
+        res.status(200).json(req.place)
         return next()
     },
     update: function(req, res, next) {
-        PlacesModel.findByIdAndUpdate(req.resource.id, req.body, { new: true },
+        Place.findByIdAndUpdate(req.resource.id, req.body, { new: true },
             function(err, resource) {
                 console.log(req.resource);
                 console.log('---------------------');

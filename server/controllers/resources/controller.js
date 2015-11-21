@@ -27,7 +27,7 @@ module.exports = {
                 return next(err)
             })
     },
-    single: function(req, res, next) {
+    get: function(req, res, next) {
         res.status(200).json(req.resource)
         return next()
     },
