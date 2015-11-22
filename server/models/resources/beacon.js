@@ -11,7 +11,7 @@ var beaconSchema = new mongoose.Schema({
 
 beaconSchema.methods = {}
 beaconSchema.statics = {
-    getPlace: function(id, next) {
+    getPlace: function(id, lean, next) {
         this.findOne({
             beaconId: id
         }, function(err, beacon) {
@@ -19,7 +19,7 @@ beaconSchema.statics = {
                 return next(err)
             }
             if (beacon) {
-                Place.getByName(beacon.placeName, true, next)
+                Place.getByName(beacon.placeName, lean, next)
             } else {
                 err = new HttpError(404, 'A beacon with this id does not exist : ' + id)
                 return next(err)

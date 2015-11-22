@@ -30,8 +30,7 @@ module.exports = {
             return next()
         })
     },
-    load: function(req, res, next, param) {
-        console.log('loading place')
+    load: function(req, res, next, beaconId) {
         var lean = req.method === 'GET'
             // Place.getByName(beaconId, lean,
             //     function(err, place) {
@@ -46,23 +45,19 @@ module.exports = {
         //         err = new HttpError(404, 'A resource with this id does not exist : ' + beaconId)
         //         return next(err)
         //     })
+        Beacon.getPlace(beaconId, lean,
+            function(err, place) {
 
-        if (lean) {
-            var beaconId = param
-            Beacon.getPlace(beaconId,
-                function(err, place) {
-
-                    if (err) {
-                        return next(err);
-                    }
-                    if (place) {
-                        req.place = place
-                        return next()
-                    }
-                    err = new HttpError(404, 'A resource with this id does not exist : ' + beaconId)
-                    return next(err)
-                })
-        }
+                if (err) {
+                    return next(err);
+                }
+                if (place) {
+                    req.place = place
+                    return next()
+                }
+                err = new HttpError(404, 'A resource with this id does not exist : ' + beaconId)
+                return next(err)
+            })
     },
     get: function(req, res, next) {
         res.status(200).json(req.place);
