@@ -13,7 +13,7 @@ module.exports = {
     },
     load: function(req, res, next, id) {
         var lean = req.method === 'GET'
-        Beacon.getById(id, lean,
+        Beacon.findById(id,
             function(err, beacon) {
                 if (err) {
                     return next(err);

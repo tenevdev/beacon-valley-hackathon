@@ -61,7 +61,7 @@ var Offer = require('../../models').Resources.Offer,
             })
     },
     delete: function(req, res, next) {
-        req.offer.id.remove(function(err) {
+        req.offer.remove(function(err) {
             if (err) {
                 return next(err)
             }
