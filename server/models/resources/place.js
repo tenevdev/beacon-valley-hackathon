@@ -7,6 +7,7 @@ var placeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: String,
     menu: [{
         type: ObjectId,
         ref: 'MenuSection'
