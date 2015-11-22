@@ -6,9 +6,13 @@ var MenuController = require('../../controllers').Resources.MenuController,
         mergeParams: true
     });
 
-MenuRouter.route('/menu')
+MenuRouter.param('menuSectionId', MenuController.load);
+
+MenuRouter.route('/')
     .post(MenuController.create)
     .get(MenuController.get)
+
+MenuRouter.route('/:menuSectionId')
     .put(MenuController.update)
     .delete(MenuController.delete);
 
