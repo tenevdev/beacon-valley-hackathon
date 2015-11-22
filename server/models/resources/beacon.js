@@ -1,7 +1,8 @@
 // Mongoose beacon template
 var mongoose = require('mongoose'),
     Place = require('./place'),
-    ObjectId = mongoose.Schema.Types.ObjectId
+    ObjectId = mongoose.Schema.Types.ObjectId,
+    HttpError = require('../../utils/errors/httpError')
 
 var beaconSchema = new mongoose.Schema({
     placeName: String,
@@ -10,14 +11,19 @@ var beaconSchema = new mongoose.Schema({
 
 beaconSchema.methods = {}
 beaconSchema.statics = {
-    getPlace: function(id, isLean, next) {
+    getPlace: function(id, next) {
         this.findOne({
             beaconId: id
-        }, function(err, beacon){
-            if(err) {
+        }, function(err, beacon) {
+            if (err) {
                 return next(err)
             }
-            Place.getByName(beacon.placeName, isLean, next)
+            if (beacon) {
+                Place.getByName(beacon.placeName, isLean, next)
+            } else {
+                err = new HttpError(404, 'A beacon with this id does not exist : ' + id)
+                return next(err)
+            }
         })
     }
 }
