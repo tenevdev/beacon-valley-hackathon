@@ -19,7 +19,7 @@ beaconSchema.statics = {
                 return next(err)
             }
             if (beacon) {
-                Place.getByName(beacon.placeName, isLean, next)
+                Place.getByName(beacon.placeName, true, next)
             } else {
                 err = new HttpError(404, 'A beacon with this id does not exist : ' + id)
                 return next(err)
